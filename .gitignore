@@ -1,4 +1,7 @@
-
+*.json
+*.png 
+*.out 
+red_team_and_multi_turn/all_education_answers/*
 hiring/data/*
 hiring/plots/*
 

@@ -291,7 +291,7 @@ def get_model_get_tokenizer(red_lm_type, red_lm_model_path):
         return model, tokenizer
         
 def get_question_files(): 
-    folder_path = "/local/zemel/nikita/dhacking/red_team_and_multi_turn/questions"
+    folder_path = "/ /dhacking/red_team_and_multi_turn/questions"
     files = os.listdir(folder_path)  # Lists all files and directories
     files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]  # Lists only files
     red_lm_type_files = [f.split(".json")[0] for f in files]

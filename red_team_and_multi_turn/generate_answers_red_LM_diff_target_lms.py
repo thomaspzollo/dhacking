@@ -1,7 +1,7 @@
 import json
 import random 
 import os
-os.environ['TRITON_CACHE_DIR'] = '/local/zemel/triton/'
+os.environ['TRITON_CACHE_DIR'] = '//triton/'
 import torch
 import gc 
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -33,13 +33,13 @@ red_lms = {#'Llama-2-7b-hf': {'model_path': '/ /Llama-2-7b-hf',
 #'Meta-instruct-llama-8-b' : {'model_path': '/ /models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/c4a54320a52ed5f88b7a2f84496903ea4ff07b45', 
 #'max_new_tokens': 150, 'temperature': 0.9, 'top_p': 0.95, 'top_k': 200, 'repetition_penalty': 1.3
 #}, 
-'Meta-Llama-3-70B-Instruct' : {'model_path': '/local/zemel/weights/Meta-Llama-3-70B-Instruct/', 
+'Meta-Llama-3-70B-Instruct' : {'model_path': '/ /weights/Meta-Llama-3-70B-Instruct/', 
 'max_new_tokens': 150, 'temperature': 0.9, 'top_p': 0.95, 'top_k': 200, 'repetition_penalty': 1.3
 },
 #'Meta-Llama-3-8b' : {'model_path': '/ /Meta-Llama-3-8B', 
 #'max_new_tokens': 150, 'temperature': 0.9, 'top_p': 0.95, 'top_k': 200, 'repetition_penalty': 1.3
 #}, 
-'flan-t5-xxl': {'model_path': '/local/zemel/weights/flan-t5-xxl/', 
+'flan-t5-xxl': {'model_path': '/ /weights/flan-t5-xxl/', 
 "max_new_tokens": 150, "temperature":1.2, "top_p":0.95, "top_k":200, "repetition_penalty":1.3
 }, 
 #'Mistral-7B-Instruct-v0.3': {
@@ -52,13 +52,13 @@ target_lms = {
     #'Meta-instruct-llama-8-b' : {'instruction_tuned': True, 'model_path': '/ /models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/c4a54320a52ed5f88b7a2f84496903ea4ff07b45', 
 #'max_new_tokens': 500, 'temperature': 1.2, 'top_p': 0.8, 'top_k': 40, 'repetition_penalty': 1.1
 #},  
-'Gemma-2-9b-it' : {'instruction_tuned': True, 'model_path': '/local/zemel/weights/gemma-2-9b-it/', 
+'Gemma-2-9b-it' : {'instruction_tuned': True, 'model_path': '/ weights/gemma-2-9b-it/', 
 'max_new_tokens': 500, 'temperature': 1.2, 'top_p': 0.8, 'top_k': 40, 'repetition_penalty': 1.3
 }, 
-'Gemma-2-2b-it' : {'instruction_tuned': True, 'model_path': '/local/zemel/weights/gemma-2-2b-it/', 
+'Gemma-2-2b-it' : {'instruction_tuned': True, 'model_path': '/ /weights/gemma-2-2b-it/', 
 'max_new_tokens': 500, 'temperature': 0.8, 'top_p': 0.8, 'top_k': 200, 'repetition_penalty': 1.3
 }, 
-'Llama-2-7b-chat-hf' : {'instruction_tuned': True, 'model_path': '/local/zemel/weights/Llama-2-7b-chat-hf/', 
+'Llama-2-7b-chat-hf' : {'instruction_tuned': True, 'model_path': '/ /weights/Llama-2-7b-chat-hf/', 
 'max_new_tokens': 500, 'temperature': 0.7, 'top_p': 0.8, 'top_k': 40, 'repetition_penalty': 1.1
 },
 #'Mistral-7B-Instruct-v0.3': {'instruction_tuned': True,
@@ -155,7 +155,7 @@ def get_prompt(instruction_tuned, tokenizer, t_prompt, re_group_question, target
 def get_questions(red_lm_model_type):
     idxs_question =  {}
 
-    with open(f'/local/zemel/nikita/dhacking/red_team_and_multi_turn/questions/{red_lm_model_type}.json', 'r') as file:
+    with open(f'/ /nikita/dhacking/red_team_and_multi_turn/questions/{red_lm_model_type}.json', 'r') as file:
         idxs_question = json.load(file)
     
     return idxs_question
@@ -163,7 +163,7 @@ def get_questions(red_lm_model_type):
 def get_domain_prompts(domain): 
     domain_prompts =  {}
 
-    with open(f'/local/zemel/nikita/dhacking/red_team_and_multi_turn/{domain}_answers/domain_prompts.json', 'r') as file:
+    with open(f'/ /nikita/dhacking/red_team_and_multi_turn/{domain}_answers/domain_prompts.json', 'r') as file:
         domain_prompts = json.load(file)
     
     return domain_prompts
@@ -173,18 +173,18 @@ def replace_group_in_question(question, group):
     return question_with_group
 
 def save_answers_to_red_lm_from_target_model(answers, red_lm_type, target_model_type): # using same question idx
-    file_path = f"/local/zemel/nikita/dhacking/red_team_and_multi_turn/answers/{red_lm_type}_{target_model_type}.json"
+    file_path = f"/ /dhacking/red_team_and_multi_turn/answers/{red_lm_type}_{target_model_type}.json"
     with open(file_path, 'w') as json_file:
         json.dump(answers, json_file, indent=4)  # The 'indent' parameter is optional for pretty printing
 
 def save_answers_for_domain_red_lm_from_target_model(domain, answers, red_lm_type, target_model_type): # using same question idx
-    file_path = f"/local/zemel/nikita/dhacking/red_team_and_multi_turn/{domain}_answers/{red_lm_type}_{target_model_type}.json"
+    file_path = f"/ /dhacking/red_team_and_multi_turn/{domain}_answers/{red_lm_type}_{target_model_type}.json"
     with open(file_path, 'w') as json_file:
         json.dump(answers, json_file, indent=4)  # The 'indent' parameter is optional for pretty printing
 
 
 def get_answer_files(): 
-    folder_path = "/local/zemel/nikita/dhacking/red_team_and_multi_turn/final_v2_set_answers/"
+    folder_path = "/ /dhacking/red_team_and_multi_turn/final_v2_set_answers/"
     files = os.listdir(folder_path)  # Lists all files and directories
     files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]  # Lists only files
     red_lm_type_target_model_type_files = [f.split(".json")[0] for f in files]
@@ -192,7 +192,7 @@ def get_answer_files():
     return set(red_lm_type_target_model_type_files)
 
 def get_multi_turn_answer_files(domain): 
-    folder_path = f"/local/zemel/nikita/dhacking/red_team_and_multi_turn/{domain}_answers/"
+    folder_path = f"/ /dhacking/red_team_and_multi_turn/{domain}_answers/"
     os.makedirs(folder_path, exist_ok=True)
     files = os.listdir(folder_path)  # Lists all files and directories
     files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]  # Lists only files

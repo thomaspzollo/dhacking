@@ -1,8 +1,8 @@
 import json
 import random 
 import os
-os.environ['TRITON_CACHE_DIR'] = '/local/zemel/triton/'
-os.environ['HF_DATASETS_CACHE'] = '/local/zemel/datasets/'
+os.environ['TRITON_CACHE_DIR'] = '/ /triton/'
+os.environ['HF_DATASETS_CACHE'] = '/ /datasets/'
 import torch
 import gc 
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -25,7 +25,7 @@ torch.backends.cudnn.benchmark = False
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 domain_lms = {
-'Gemma-2-9b-it' : {'instruction_tuned': True, 'model_path': '/local/zemel/weights/gemma-2-9b-it/', 
+'Gemma-2-9b-it' : {'instruction_tuned': True, 'model_path': '/ /weights/gemma-2-9b-it/', 
 'max_new_tokens': 150, 'temperature': 1.2, 'top_p': 0.8, 'top_k': 40, 'repetition_penalty': 1.3
 }
 }
@@ -59,25 +59,25 @@ def get_domain_prompt(instruction_tuned, tokenizer, target_model_type, domain_qu
 
 def get_questions_from_dataset(domain):
     if domain == 'education': 
-        ds = load_dataset("/local/zemel/datasets/gsm8k", "main")
+        ds = load_dataset("/ /datasets/gsm8k", "main")
         test_ds = ds['train']
         questions = [t_e['question'] for t_e in test_ds]
         return questions 
     
     if domain == 'health': 
-        ds = load_dataset("/local/zemel/nikita/datasets/MedQuad-MedicalQnADataset")
+        ds = load_dataset("/ /nikita/datasets/MedQuad-MedicalQnADataset")
         train_ds = ds['train']
         questions = train_ds['Question']
         return questions
 
 
 def save_multi_turn_domain_answers_from_domain_model(domain, multi_turn_q_answers, domain_model_type): # using same question idx
-    file_path = f'/local/zemel/nikita/dhacking/red_team_and_multi_turn/{domain}_answers/domain_prompts.json'
+    file_path = f'/ /nikita/dhacking/red_team_and_multi_turn/{domain}_answers/domain_prompts.json'
     with open(file_path, 'w') as json_file:
         json.dump(multi_turn_q_answers, json_file, indent=4)  # The 'indent' parameter is optional for pretty printing
 
 def get_domain_answer_files(domain): 
-    folder_path = f"/local/zemel/nikita/dhacking/red_team_and_multi_turn/{domain}_answers/"
+    folder_path = f"/ /nikita/dhacking/red_team_and_multi_turn/{domain}_answers/"
     files = os.listdir(folder_path)  # Lists all files and directories
     files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]  # Lists only files
     red_lm_type_target_model_type_files = [f.split(".json")[0] for f in files]

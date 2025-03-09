@@ -153,4 +153,4 @@ for red_lm_type in red_lms:
 
 fig.supxlabel('Conversation Length', fontsize=17, y=-0.075)
 
-plt.savefig(f'/local/zemel/nikita/dhacking/red_team_and_multi_turn/lineplot_multi_turn_{selected_group}.png',  bbox_inches="tight")
+plt.savefig(f'/ /nikita/dhacking/red_team_and_multi_turn/lineplot_multi_turn_{selected_group}.png',  bbox_inches="tight")

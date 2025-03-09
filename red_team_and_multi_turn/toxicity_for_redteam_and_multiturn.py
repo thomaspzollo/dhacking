@@ -1,9 +1,9 @@
 import os
-os.environ['HF_MODULES_CACHE'] =  '/local/zemel/.cache/'
-os.environ['HF_HOME'] = '/local/zemel/.cache/'
-os.environ['HF_DATASETS_CACHE'] = '/local/zemel/.cache/'
-os.environ['XDG_CACHE_HOME'] = '/local/zemel/.cache/'
-os.environ['HOME'] = '/local/zemel/'
+os.environ['HF_MODULES_CACHE'] =  '/ /.cache/'
+os.environ['HF_HOME'] = '/ /.cache/'
+os.environ['HF_DATASETS_CACHE'] = '/ /.cache/'
+os.environ['XDG_CACHE_HOME'] = '/ /.cache/'
+os.environ['HOME'] = '/ /'
 import json 
 import sys
 
@@ -60,7 +60,7 @@ def get_answer_files():
     return set(red_lm_type_target_model_type_files)
 
 def get_multi_turn_answer_files(domain): 
-    folder_path = f"/local/zemel/nikita/dhacking/red_team_and_multi_turn/1000_{domain}_answers"
+    folder_path = f"/ /dhacking/red_team_and_multi_turn/1000_{domain}_answers"
     files = os.listdir(folder_path)  # Lists all files and directories
     files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]  # Lists only files
     red_lm_type_target_model_type_files = [f.split(".json")[0] for f in files]

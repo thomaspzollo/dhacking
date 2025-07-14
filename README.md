@@ -20,6 +20,8 @@ This experiment is described in section 4.1 of the paper. Please find the releva
 4. Scores the resumes(```score.ipynb```) using different metrics (such as ROUGE and sentiment). 
 5. Finally, simulate the interview decisions (```simulate_decisions.py```)
 
+Our synthetic resumes are available for download at this link: https://drive.google.com/file/d/1yJ0p-mqMsKtsQlH7DcXv6Q9l96gs_06k/
+
 
 ### Red teaming experiment 
 This experiment is described in section 4.2 of the paper. Please find the relevant files to this experiment in the  `red_team_and_multi_turn` folder.  
